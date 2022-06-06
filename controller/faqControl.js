@@ -110,10 +110,33 @@ export function getCategory(req, res) {
   });
 }
 
+export function getAllByGroup(req, res) {
+  console.log(req.cookies);
+  res.cookie("sky", "nadish", { httpOnly: true });
+
+  const filtercodeIs = parseInt(req.params.filterx);
+  let sqlQuryWithCount = `SELECT f.faqid, f.faq,f.catId,f.userid, f.sututes, f.create_at, f.update_at,
+  a.faqid, count(*) as rowcount, u1.userid  AS userid, u1.username AS autherName, u1.avatar
+ FROM nadish_site.faq f 
+   INNER JOIN nadish_site.answers a ON ( f.faqid = a.faqid  )  
+   INNER JOIN nadish_site.user u1 ON ( f.userid = u1.userid  )  
+  where f.catid=?
+ GROUP BY f.faqid, f.faq, f.userid, f.sututes, f.create_at, f.update_at, a.faqid, u1.userid, u1.username, u1.avatar
+ ;
+`;
+  dataBase.execute(sqlQuryWithCount, [filtercodeIs], (err, data) => {
+    if (err) throw err;
+    console.log(data);
+    res.status(200).send({ data });
+    // res.send({ data });
+  });
+}
+
 export default {
   getAll,
   getfaqid,
   getAnswerByfaqid,
   getAnswerCountByfaqid,
   getCategory,
+  getAllByGroup,
 };
