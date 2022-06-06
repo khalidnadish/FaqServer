@@ -102,8 +102,13 @@ export function getAnswerCountByfaqid(req, res) {
 
 export function getCategory(req, res) {
   let sqlQury = `SELECT *  FROM category`;
+  let catSqlQury = `SELECT   c.catid, c.catName,     count(*) faqrowcount
+  FROM nadish_site.category c 
+       JOIN nadish_site.faq f ON ( c.catid = f.catId  )  
+  GROUP BY  c.catid, c.catName,  f.catId
+  order by faqrowcount desc`;
 
-  dataBase.execute(sqlQury, (err, data) => {
+  dataBase.execute(catSqlQury, (err, data) => {
     if (err) throw err;
     console.log(data);
     res.status(200).send(data);
@@ -115,6 +120,7 @@ export function getAllByGroup(req, res) {
   res.cookie("sky", "nadish", { httpOnly: true });
 
   const filtercodeIs = parseInt(req.params.filterx);
+  console.log("filter code >>>>>> :" + filtercodeIs);
   let sqlQuryWithCount = `SELECT f.faqid, f.faq,f.catId,f.userid, f.sututes, f.create_at, f.update_at,
   a.faqid, count(*) as rowcount, u1.userid  AS userid, u1.username AS autherName, u1.avatar
  FROM nadish_site.faq f 
