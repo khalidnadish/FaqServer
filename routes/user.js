@@ -9,6 +9,7 @@ import {
   createUser,
   loginUser,
   avatarUpload,
+  showFlloer,
 } from "../controller/userControl.js";
 
 const router = express.Router();
@@ -43,6 +44,8 @@ router.post("/upload/:userId", upload.single("avatar"), avatarUpload);
 // });
 
 router.get("/", getAlluser);
+router.get("/showflower/:userId", showFlloer);
+
 // router.post("/1000", newUser);
 
 export default router;
