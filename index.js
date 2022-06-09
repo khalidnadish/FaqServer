@@ -6,7 +6,7 @@ import userRoutes from "./routes/user.js";
 import cookieParser from "cookie-Parser";
 import { cnf } from "./helpeer/config.js";
 
-// dotenv.config();
+dotenv.config();
 const app = express();
 app.use(cors());
 // app.use(khalid());
@@ -27,7 +27,7 @@ function khalid(req, res, next) {
   next();
 }
 
-const server = app.listen(port, () => {
+const server = app.listen(process.env.PORT || 3001, () => {
   console.log(` app listening on port ${port}`);
 });
 
