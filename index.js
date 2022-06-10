@@ -3,7 +3,7 @@ import cors from "cors";
 import faqRoutes from "./routes/faq.js";
 import userRoutes from "./routes/user.js";
 
-import cookieParser from "cookie-Parser";
+// import cookieParser from "cookie-Parser";
 import { cnf } from "./helpeer/config.js";
 
 dotenv.config();
