@@ -1,6 +1,6 @@
 import dataBase from "../controller/database.js";
 import express from "express";
-import cookieParser from "cookie-Parser";
+
 import { cnf } from "../helpeer/config.js";
 
 export function getAll(req, res) {
