@@ -28,7 +28,7 @@ function khalid(req, res, next) {
 }
 
 const server = app.listen(process.env.PORT || 3001, () => {
-  console.log(` app listening on port ${port}`);
+  console.log(` app listening on port  `);
 });
 
 server.timeout = 1000 * 60 * 10; // 10 minutes
