@@ -1,5 +1,5 @@
 import db from "mysql2";
-import { cnf } from "../../server/helpeer/config.js";
+import { cnf } from "../helpeer/config.js";
 
 const dataBase = db.createPool({
   host: cnf.host,
