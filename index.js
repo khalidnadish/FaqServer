@@ -13,7 +13,7 @@ app.use(cors());
 // app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cookieParser());
+// app.use(cookieParser());
 
 const port = cnf.port || 3001;
 app.use(khalid);
