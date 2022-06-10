@@ -6,7 +6,7 @@ import userRoutes from "./routes/user.js";
 // import cookieParser from "cookie-Parser";
 import { cnf } from "./helpeer/config.js";
 
-dotenv.config();
+// dotenv.config();
 const app = express();
 app.use(cors());
 // app.use(khalid());
