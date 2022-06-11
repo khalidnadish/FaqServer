@@ -117,9 +117,9 @@ export function showFlloer(req, res) {
 
   let sqlQuery = `SELECT m.userid, m.followuser, linkwith_main.username main_user,
                           linkwith_flower.username, linkwith_flower.avatar
-      FROM nadish_site.myflower m 
-        INNER JOIN nadish_site.user linkwith_main ON ( m.userid = linkwith_main.userid  )  
-        INNER JOIN nadish_site.user linkwith_flower ON ( m.followuser = linkwith_flower.userid  )  
+      FROM myflower m 
+        INNER JOIN user linkwith_main ON ( m.userid = linkwith_main.userid  )  
+        INNER JOIN user linkwith_flower ON ( m.followuser = linkwith_flower.userid  )  
       WHERE 
         m.userid = ?
       GROUP BY 
