@@ -1,7 +1,5 @@
-import dataBase from "../controller/database.js";
-// import express from "express";
-
-import { cnf } from "../helpeer/config.js";
+import { dataBase } from "../controller/database.js";
+import { configData } from "../helpeer/config.js";
 
 export function getAll(req, res) {
   console.log(req.cookies);
@@ -11,18 +9,14 @@ export function getAll(req, res) {
   FROM faq f 
     INNER JOIN answers a ON ( f.faqid = a.faqid  )  
     INNER JOIN user u1 ON ( f.userid = u1.userid  )  
-  GROUP BY f.faqid, f.faq, f.userid, f.sututes, f.create_at, f.update_at, a.faqid, u1.userid, u1.username, u1.avatar`;
-
-  let sqlQury = `SELECT faq.faqid ,faq.create_at,faq.faq,user.username AS autherName ,user.avatar AS avatar ,user.userid AS userid
-                 FROM 
-                    faq 
-                 INNER JOIN 
-                    user
-                 ON 
-                   faq.userid = user.userid ORDER BY faq.faqid`;
+    GROUP BY 
+     f.faqid, f.faq, f.userid, f.sututes, f.create_at, f.update_at, 
+     a.faqid, u1.userid, u1.username, u1.avatar`;
 
   dataBase.execute(sqlQuryWithCount, (err, data) => {
-    if (err) throw err;
+    if (err) {
+      console.log(err);
+    }
     console.log(data);
     res.status(200).send({ data });
     // res.send({ data });
@@ -35,7 +29,7 @@ export function getfaqid(req, res) {
   console.log(typeof req.params.faqid);
   const idToGet = parseInt(req.params.faqid);
 
-  console.log("env user: " + cnf.avatarUrl);
+  console.log("env user: " + configData.avatarUrl);
 
   let sqlQury = `SELECT faq.faqid ,faq.create_at,faq.faq,user.username,user.email AS email ,user.avatar AS avatar 
                  FROM 

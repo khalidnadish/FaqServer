@@ -1,21 +1,32 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-export const cnf = {
-  port: process.env.PORT,
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
+const mode = "devlopment";
+// const mode = "production";
+let configData = "";
 
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  connectTimeout: 30000,
-  connectionLimit: 10,
-  base_url: process.env.BASE_URL + process.env.PORT + "/",
-  avatarUrl: process.env.BASE_URL + process.env.PORT + "/images/avatar/",
+if (mode === "production") {
+  configData = {
+    port: process.env.PORT,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
 
-  // AVATAR_URL=http://localhost:3001/images/avatar/
-  // BASE_URL=http://localhost:3001/
-};
+    base_url: process.env.BASE_URL + process.env.PORT + "/",
+    avatarUrl: process.env.BASE_URL + process.env.PORT + "/images/avatar/",
+  };
+}
 
-// export const avatarUrl = process.env.AVATAR_URL;
-// export const port = process.env.PORT;
+if (mode === "devlopment") {
+  configData = {
+    port: 3001,
+    host: "localhost",
+    user: "nadish",
+    password: "Leno_1972",
+    database: "nadish_site",
+    base_url: "http://localhost:3001/",
+    avatarUrl: "http://localhost:3001/images/avatar/",
+  };
+}
+export { configData, mode };

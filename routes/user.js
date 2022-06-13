@@ -1,10 +1,9 @@
 import express from "express";
 import multer from "multer";
-import dataBase from "../controller/database.js";
+
 // import cookieParser from "cookie-Parser";
 
 import {
-  newUser,
   getAlluser,
   createUser,
   loginUser,

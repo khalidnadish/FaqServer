@@ -1,2 +1,6 @@
 // "start": "nodemon --experimental-modules --es-module-specifier-resolution=node index.js",
  skip_column_statistics = True if get_mysqldump_version() > Version(8, 0, 2) and self.owner.ctrl_be.target_version < Version(8, 0, 0) else False
+
+    // AVATAR_URL=http://localhost:3001/images/avatar/
+    // BASE_URL=http://localhost:3001/
+

@@ -1,5 +1,5 @@
-import dataBase from "./database.js";
-import { cnf } from "../helpeer/config.js";
+import { dataBase } from "./database.js";
+import { configData } from "../helpeer/config.js";
 
 export function newUser(req, res) {
   const { username, email, password, phone } = req.body;
@@ -77,7 +77,7 @@ export function createUser(req, res) {
 export function avatarUpload(req, res) {
   console.log(" userId is " + req.params.userId);
   // let avatraPath = "http://localhost:3001/images/avatar/";
-  let avatarImgae = cnf.avatarUrl + req.file.filename;
+  let avatarImgae = configData.avatarUrl + req.file.filename;
   const sqlQuery = `UPDATE user
   SET avatar = ?  WHERE userid = ?`;
 
@@ -86,7 +86,7 @@ export function avatarUpload(req, res) {
   dataBase.execute(sqlQuery, [avatarImgae, req.params.userId], (err, data) => {
     if (err) throw err;
     console.log({ data });
-    console.log("env user: " + cnf.avatarUrl);
+    console.log("env user: " + configData.avatarUrl);
     res.send({ data });
   });
 }
