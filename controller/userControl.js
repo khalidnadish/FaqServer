@@ -114,18 +114,31 @@ export function showFlloer(req, res) {
   console.log(" userId is " + req.params.userId);
 
   let userId = req.params.userId;
+  const sqlSelect = `SELECT m.userid, m.id,m.followuser, linkwith_main.username main_user,
+                      linkwith_flower.username, linkwith_flower.avatar FROM myflower m`;
 
-  let sqlQuery = `SELECT m.userid, m.followuser, linkwith_main.username main_user,
-                          linkwith_flower.username, linkwith_flower.avatar
-      FROM myflower m 
-        INNER JOIN user linkwith_main ON ( m.userid = linkwith_main.userid  )  
-        INNER JOIN user linkwith_flower ON ( m.followuser = linkwith_flower.userid  )  
-      WHERE 
-        m.userid = ?
-      GROUP BY 
-        m.userid, m.followuser, linkwith_main.username, linkwith_flower.username, linkwith_flower.avatar`;
+  const sqlJoin = ` INNER JOIN user linkwith_main ON ( m.userid = linkwith_main.userid  )  
+                     INNER JOIN user linkwith_flower ON ( m.followuser = linkwith_flower.userid  ) `;
+  const sqlGroup = ` GROUP BY 
+                     m.userid, m.followuser, linkwith_main.username, linkwith_flower.username, 
+                     linkwith_flower.avatar`;
 
-  dataBase.execute(sqlQuery, [userId], (err, data) => {
+  const sqlWhere = ` WHERE  m.userid = ?`;
+  const sqlOreder = ``;
+
+  const userSqlQury = sqlSelect + sqlJoin + sqlWhere + sqlGroup + sqlOreder;
+
+  // let sqlQuery = `SELECT m.userid, m.followuser, linkwith_main.username main_user,
+  //                         linkwith_flower.username, linkwith_flower.avatar
+  //     FROM myflower m
+  //       INNER JOIN user linkwith_main ON ( m.userid = linkwith_main.userid  )
+  //       INNER JOIN user linkwith_flower ON ( m.followuser = linkwith_flower.userid  )
+  //     WHERE
+  //       m.userid = ?
+  //     GROUP BY
+  //       m.userid, m.followuser, linkwith_main.username, linkwith_flower.username, linkwith_flower.avatar`;
+
+  dataBase.execute(userSqlQury, [userId], (err, data) => {
     if (err) throw err;
     console.log({ data });
     console.log("floower  user: " + userId);

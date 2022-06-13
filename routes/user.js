@@ -33,14 +33,7 @@ router.post("/", createUser);
 router.post("/login", loginUser);
 
 router.post("/upload/:userId", upload.single("avatar"), avatarUpload);
-// router.get("/getall",(err,data)=>{
-//  if(err){
-//      console.log(err)
-//      return;
-//  }
-//  getAll
 
-// });
 
 router.get("/", getAlluser);
 router.get("/showflower/:userId", showFlloer);
