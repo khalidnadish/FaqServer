@@ -2,12 +2,27 @@ import express from "express";
 import cors from "cors";
 import faqRoutes from "./routes/faq.js";
 import userRoutes from "./routes/user.js";
+import compression from "compression";
 
 // import cookieParser from "cookie-Parser";
 import { configData } from "./helpeer/config.js";
 
 // dotenv.config();
 const app = express();
+
+app.use(
+  compression({
+    level: 6,
+    threshold: 0,
+    filter: (req, res) => {
+      if (req.headers["x-no-copression"]) {
+        return false;
+      }
+      return compression.filter(req, res);
+    },
+  })
+);
+app.use(compression());
 
 app.use(cors());
 // app.use(khalid());
