@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-const mode = "devlopment";
+const mode = "production";
 // const mode = "production";
 let configData = "";
 
